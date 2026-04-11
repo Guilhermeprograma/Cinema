@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cineplus</title>
+    <link rel="stylesheet" href="mobile_styles.css">
+</head>
+<body>
+    <header class="topo">
+        <div class="logo">Cineplus</div>
+        <nav>
+            <a id="nav-home">Home</a>
+            <a id="nav-filmes">Filmes</a>
+            <a id="nav-ofertas">Ofertas</a>
+            <a id="nav-login">Login</a>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section id="home" class="pagina ativo">
+            <div class="hero">
+                <div class="hero-texto">
+                    <h1>Venha com sua família para o cinema</h1>
+                    <p>Uma noite inesquecível na tela com conforto, assentos e combos exclusivos.</p>
+                    <button class="btn" id="btn-cartaz">Ver em cartaz</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="filmes" class="pagina">
+            <h2>Filmes em Cartaz</h2>
+            <button class="btn-link" id="btn-voltar-filmes">← Voltar</button>
+            <div class="filtros">
+                <input id="filtro-busca" placeholder="Buscar filme..." type="text">
+                <select id="filtro-genero">
+                    <option value="">Todos os gêneros</option>
+                </select>
+            </div>
+            <div class="lista-filmes" id="lista-filmes"></div>
+        </section>
+
+        <section id="detalhes" class="pagina">
+            <button class="btn-link" id="btn-voltar-detalhes">← Voltar</button>
+            <div id="detalhes-conteudo"></div>
+        </section>
+
+        <section id="poltronas" class="pagina">
+            <button class="btn-link" id="btn-voltar-poltronas">← Voltar</button>
+            <h2>Mapa de Poltronas</h2>
+            <div id="sessao-info" class="sessao-info"></div>
+            <div id="mapa-poltronas" class="mapa-poltronas"></div>
+            <p id="poltrona-selecionada">Poltrona selecionada: nenhuma</p>
+            <div class="combo-box">
+                <label>Combo:</label>
+                <select id="combo-select"></select>
+            </div>
+            <button class="btn" id="btn-pagamento" disabled>Finalizar</button>
+        </section>
+
+        <section id="checkout" class="pagina">
+            <button class="btn-link" id="btn-voltar-checkout">← Voltar</button>
+            <h2>Checkout</h2>
+            <div id="resumo" class="resumo"></div>
+            <form id="form-checkout">
+                <label>Nome completo</label>
+                <input id="nome-checkout" type="text" required>
+                <label>Email</label>
+                <input id="email-checkout" type="email" required>
+                <label>Forma de pagamento</label>
+                <select id="pagamento-select" required>
+                    <option value="pix">PIX</option>
+                    <option value="cartao">Cartão</option>
+                </select>
+                <button class="btn" type="submit">Confirmar pagamento</button>
+            </form>
+        </section>
+
+        <section id="confirmacao" class="pagina">
+            <h2>Compra Concluída</h2>
+            <p id="mensagem-confirmacao"></p>
+            <button class="btn" id="btn-voltar-inicio">Voltar ao Início</button>
+        </section>
+
+        <section id="login" class="pagina">
+            <h2>Login / Cadastro</h2>
+            <div class="forms">
+                <div class="form-card">
+                    <h3>Login</h3>
+                    <form id="form-login">
+                        <label>Email</label>
+                        <input id="login-email" type="email" required>
+                        <label>Senha</label>
+                        <input id="login-senha" type="password" required>
+                        <button class="btn" type="submit">Entrar</button>
+                    </form>
+                </div>
+                <div class="form-card">
+                    <h3>Cadastro</h3>
+                    <form id="form-cadastro">
+                        <label>Nome</label>
+                        <input id="cadastro-nome" type="text" required>
+                        <label>Email</label>
+                        <input id="cadastro-email" type="email" required>
+                        <label>Senha</label>
+                        <input id="cadastro-senha" type="password" required>
+                        <button class="btn" type="submit">Cadastrar</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="ofertas" class="pagina">
+            <h2>Ofertas e Combos</h2>
+            <button class="btn-link" id="btn-voltar-ofertas">← Voltar</button>
+            <div class="ofertas-grid" id="ofertas-grid"></div>
+        </section>
+    </main>
+
+    <div id="libras-modal" class="modal oculto">
+        <div class="modal-conteudo">
+            <h3>LIBRAS - Acessibilidade</h3>
+            <p>O Cineplus oferece guia visual e tradução em Libras para navegação.</p>
+            <button class="btn" id="btn-fechar-libras">Fechar</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Cineplus. CinePlus é um Cinema de rua para as comunidades sem renda fixa, com o apoio da Prefeitura do Estado de São Paulo e Governo Federal.</p>  
+    </footer>
+
+    <div id="vlibras-badge" role="button" aria-label="Abrir Libras" onclick="abrirLibras()"></div>
+
+    <div vw class="enabled">
+        <div vw-access-button class="vw-access-button"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
+    <script src="mobile_app.js"></script>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js" onload="window.VLibras && new window.VLibras.Widget('https://vlibras.gov.br/app')"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,23 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Exemplo de uso das classes
+        Cliente cliente = new Cliente("João Silva", "joao@email.com", "senha123", "123456789");
+        cliente.ExibirPerfil();
+
+        Ingresso ingresso = new Ingresso
+        {
+            Filme = "Aventura Espacial",
+            Horario = "20:00",
+            Poltrona = "A5",
+            TemCombo = true
+        };
+        Console.WriteLine($"Total do ingresso: R$ {ingresso.CalcularTotal()}");
+
+        // Simulação de venda
+        Console.WriteLine("Ingresso vendido com sucesso!");
+    }
+}

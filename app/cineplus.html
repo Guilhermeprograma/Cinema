@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cineplus - Completo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="topo">
+        <div class="logo">Cineplus</div>
+        <nav>
+            <a href="#" onclick="mostrarSecao('home'); return false;">Home</a>
+            <a href="#" onclick="mostrarSecao('filmes'); return false;">Filmes</a>
+            <a href="#" onclick="mostrarSecao('ofertas'); return false;">Ofertas</a>
+            <a href="#" onclick="mostrarSecao('login'); return false;" id="nav-login">Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="pagina">
+            <div class="hero">
+                <div class="hero-texto">
+                    <h1>Venha com sua família para o cinema</h1>
+                    <p>Uma noite inesquecível na tela com conforto, assentos e combos exclusivos.</p>
+                    <button class="btn" onclick="mostrarSecao('filmes')">Ver em cartaz</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="filmes" class="pagina oculto">
+            <h2>Filmes em Cartaz</h2>
+            <div class="filtros">
+                <input id="filtro-busca" placeholder="Buscar filme..." oninput="filtrarFilmes()">
+                <select id="filtro-genero" onchange="filtrarFilmes()">
+                    <option value="">Todos os gêneros</option>
+                </select>
+            </div>
+            <div class="lista-filmes" id="lista-filmes"></div>
+        </section>
+
+        <section id="detalhes" class="pagina oculto">
+            <button class="btn-link" onclick="mostrarSecao('filmes')">← Voltar</button>
+            <div id="detalhes-conteudo"></div>
+        </section>
+
+        <section id="poltronas" class="pagina oculto">
+            <button class="btn-link" onclick="mostrarSecao('detalhes')">← Voltar</button>
+            <h2>Mapa de Poltronas</h2>
+            <div id="sessao-info" class="sessao-info"></div>
+            <div id="mapa-poltronas" class="mapa-poltronas"></div>
+            <p id="poltrona-selecionada">Poltrona selecionada: nenhuma</p>
+            <div class="combo-box">
+                <label>Combo:</label>
+                <select id="combo-select"></select>
+            </div>
+            <button class="btn" id="btn-pagamento" onclick="mostrarSecao('checkout')" disabled>Finalizar</button>
+        </section>
+
+        <section id="checkout" class="pagina oculto">
+            <button class="btn-link" onclick="mostrarSecao('poltronas')">← Voltar</button>
+            <h2>Checkout</h2>
+            <div id="resumo" class="resumo"></div>
+            <form id="form-checkout" onsubmit="confirmarCompra(event)">
+                <label>Nome completo</label>
+                <input id="nome-checkout" type="text" required>
+                <label>Email</label>
+                <input id="email-checkout" type="email" required>
+                <label>Forma de pagamento</label>
+                <select id="pagamento-select" required>
+                    <option value="pix">PIX</option>
+                    <option value="cartao">Cartão</option>
+                </select>
+                <button class="btn" type="submit">Confirmar pagamento</button>
+            </form>
+        </section>
+
+        <section id="confirmacao" class="pagina oculto">
+            <h2>Compra Concluída</h2>
+            <p id="mensagem-confirmacao"></p>
+            <button class="btn" onclick="mostrarSecao('home')">Voltar ao Início</button>
+        </section>
+
+        <section id="login" class="pagina oculto">
+            <h2>Login / Cadastro</h2>
+            <div class="forms">
+                <div class="form-card">
+                    <h3>Login</h3>
+                    <form onsubmit="login(event)">
+                        <label>Email</label>
+                        <input id="login-email" type="email" required>
+                        <label>Senha</label>
+                        <input id="login-senha" type="password" required>
+                        <button class="btn" type="submit">Entrar</button>
+                    </form>
+                </div>
+                <div class="form-card">
+                    <h3>Cadastro</h3>
+                    <form onsubmit="cadastro(event)">
+                        <label>Nome</label>
+                        <input id="cadastro-nome" type="text" required>
+                        <label>Email</label>
+                        <input id="cadastro-email" type="email" required>
+                        <label>Senha</label>
+                        <input id="cadastro-senha" type="password" required>
+                        <button class="btn" type="submit">Cadastrar</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="ofertas" class="pagina oculto">
+            <h2>Ofertas e Combos</h2>
+            <div class="ofertas-grid" id="ofertas-grid"></div>
+        </section>
+    </main>
+
+    <div id="libras-modal" class="modal oculto">
+        <div class="modal-conteudo">
+            <h3>LIBRAS - Acessibilidade</h3>
+            <p>O Cineplus oferece guia visual e tradução em Libras para navegação.</p>
+            <p>Use nosso suporte com vídeo: <a href="https://www.youtube.com/watch?v=puMqcmQ6V4E" target="_blank">Aula básica</a></p>
+            <button class="btn" onclick="fecharLibras()">Fechar</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Cineplus. CinePlus é um Cinema de rua para as comunidades sem renda fixa, com o apoio da Prefeitura do Estado de São Paulo e Governo Federal.</p>  
+    </footer>
+
+    <div id="vlibras-badge" role="button" aria-label="Abrir Libras" onclick="abrirLibras()"></div>
+
+    <div vw class="enabled">
+        <div vw-access-button class="vw-access-button"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js" onload="window.VLibras && new window.VLibras.Widget('https://vlibras.gov.br/app')"></script>
+</body>
+</html>

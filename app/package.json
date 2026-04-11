@@ -1,0 +1,12 @@
+{
+  "name": "cinetech-flow-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for CineTech Flow cinema system",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": ["cinema", "frontend"],
+  "author": "Student",
+  "license": "MIT"
+}
