@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <!-- Meta tags essenciais -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Título da página -->
     <title>Cineplus - Completo</title>
+    
+    <!-- Estilos CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- ====== CABEÇALHO ====== -->
     <header class="topo">
         <div class="logo">Cineplus</div>
         <nav>
@@ -17,7 +23,9 @@
         </nav>
     </header>
 
+    <!-- ====== CONTEÚDO PRINCIPAL ====== -->
     <main>
+        <!-- SEÇÃO: HOME -->
         <section id="home" class="pagina">
             <div class="hero">
                 <div class="hero-texto">
@@ -28,93 +36,136 @@
             </div>
         </section>
 
+        <!-- SEÇÃO: LISTAGEM DE FILMES -->
         <section id="filmes" class="pagina oculto">
             <h2>Filmes em Cartaz</h2>
+            
+            <!-- Filtros de busca e gênero -->
             <div class="filtros">
                 <input id="filtro-busca" placeholder="Buscar filme..." oninput="filtrarFilmes()">
                 <select id="filtro-genero" onchange="filtrarFilmes()">
                     <option value="">Todos os gêneros</option>
                 </select>
             </div>
+            
+            <!-- Grid de filmes -->
             <div class="lista-filmes" id="lista-filmes"></div>
         </section>
 
+        <!-- SEÇÃO: DETALHES DO FILME -->
         <section id="detalhes" class="pagina oculto">
             <button class="btn-link" onclick="mostrarSecao('filmes')">← Voltar</button>
             <div id="detalhes-conteudo"></div>
         </section>
 
+        <!-- SEÇÃO: SELEÇÃO DE POLTRONAS -->
         <section id="poltronas" class="pagina oculto">
             <button class="btn-link" onclick="mostrarSecao('detalhes')">← Voltar</button>
             <h2>Mapa de Poltronas</h2>
+            
+            <!-- Informações da sessão -->
             <div id="sessao-info" class="sessao-info"></div>
+            
+            <!-- Grid de poltronas (5 linhas × 10 colunas) -->
             <div id="mapa-poltronas" class="mapa-poltronas"></div>
+            
+            <!-- Exibe poltrona selecionada -->
             <p id="poltrona-selecionada">Poltrona selecionada: nenhuma</p>
+            
+            <!-- Seletor de combo -->
             <div class="combo-box">
                 <label>Combo:</label>
                 <select id="combo-select"></select>
             </div>
+            
+            <!-- Botão para prosseguir para checkout -->
             <button class="btn" id="btn-pagamento" onclick="mostrarSecao('checkout')" disabled>Finalizar</button>
         </section>
 
+        <!-- SEÇÃO: CHECKOUT -->
         <section id="checkout" class="pagina oculto">
             <button class="btn-link" onclick="mostrarSecao('poltronas')">← Voltar</button>
             <h2>Checkout</h2>
+            
+            <!-- Resumo do pedido -->
             <div id="resumo" class="resumo"></div>
+            
+            <!-- Formulário de dados do cliente -->
             <form id="form-checkout" onsubmit="confirmarCompra(event)">
                 <label>Nome completo</label>
                 <input id="nome-checkout" type="text" required>
+                
                 <label>Email</label>
                 <input id="email-checkout" type="email" required>
+                
                 <label>Forma de pagamento</label>
                 <select id="pagamento-select" required>
                     <option value="pix">PIX</option>
                     <option value="cartao">Cartão</option>
                 </select>
+                
                 <button class="btn" type="submit">Confirmar pagamento</button>
             </form>
         </section>
 
+        <!-- SEÇÃO: CONFIRMAÇÃO DE COMPRA -->
         <section id="confirmacao" class="pagina oculto">
             <h2>Compra Concluída</h2>
             <p id="mensagem-confirmacao"></p>
             <button class="btn" onclick="mostrarSecao('home')">Voltar ao Início</button>
         </section>
 
+        <!-- SEÇÃO: LOGIN / CADASTRO -->
         <section id="login" class="pagina oculto">
             <h2>Login / Cadastro</h2>
             <div class="forms">
+                <!-- Formulário de LOGIN -->
                 <div class="form-card">
                     <h3>Login</h3>
                     <form onsubmit="login(event)">
                         <label>Email</label>
                         <input id="login-email" type="email" required>
+                        
                         <label>Senha</label>
                         <input id="login-senha" type="password" required>
+                        
                         <button class="btn" type="submit">Entrar</button>
                     </form>
                 </div>
+                
+                <!-- Formulário de CADASTRO -->
                 <div class="form-card">
                     <h3>Cadastro</h3>
                     <form onsubmit="cadastro(event)">
-                        <label>Nome</label>
+                        <label for="cadastro-nome">Nome</label>
                         <input id="cadastro-nome" type="text" required>
-                        <label>Email</label>
+                        
+                        <label for="cadastro-email">Email</label>
                         <input id="cadastro-email" type="email" required>
-                        <label>Senha</label>
-                        <input id="cadastro-senha" type="password" required>
+                        
+                        <label for="cadastro-senha">Senha</label>
+                        <input id="cadastro-senha" type="password" required minlength="6">
+                        
+                        <label for="cadastro-senha-confirm">Confirmar Senha</label>
+                        <input id="cadastro-senha-confirm" type="password" required minlength="6">
+                        
+                        <small style="color: var(--text-muted); margin-top: 0.5rem;">Mínimo 6 caracteres</small>
+                        
                         <button class="btn" type="submit">Cadastrar</button>
                     </form>
                 </div>
             </div>
         </section>
 
+        <!-- SEÇÃO: OFERTAS E COMBOS -->
         <section id="ofertas" class="pagina oculto">
             <h2>Ofertas e Combos</h2>
             <div class="ofertas-grid" id="ofertas-grid"></div>
         </section>
     </main>
 
+    <!-- ====== MODAL DE LIBRAS ====== -->
+    <!-- Modal de acessibilidade para usuários surdos -->
     <div id="libras-modal" class="modal oculto">
         <div class="modal-conteudo">
             <h3>LIBRAS - Acessibilidade</h3>
@@ -124,12 +175,16 @@
         </div>
     </div>
 
+    <!-- ====== RODAPÉ ====== -->
     <footer>
         <p>&copy; 2026 Cineplus. CinePlus é um Cinema de rua para as comunidades sem renda fixa, com o apoio da Prefeitura do Estado de São Paulo e Governo Federal.</p>  
     </footer>
 
+    <!-- ====== WIDGETS DE ACESSIBILIDADE ====== -->
+    <!-- Botão para abrir LIBRAS -->
     <div id="vlibras-badge" role="button" aria-label="Abrir Libras" onclick="abrirLibras()"></div>
 
+    <!-- Widget VLibras para tradução automática em língua de sinais -->
     <div vw class="enabled">
         <div vw-access-button class="vw-access-button"></div>
         <div vw-plugin-wrapper>
@@ -137,7 +192,13 @@
         </div>
     </div>
 
+    <!-- ====== SCRIPTS ====== -->
+    <!-- Script principal da aplicação -->
     <script src="app.js"></script>
+    
+    <!-- Plugin VLibras do governo brasileiro -->
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js" onload="window.VLibras && new window.VLibras.Widget('https://vlibras.gov.br/app')"></script>
+</body>
+</html>
 </body>
 </html>
